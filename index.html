@@ -1,24 +1,13 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Vizuka TopUp — Free Fire top-up store.">
-<meta name="theme-color" content="#7c3aed"><title>Vizuka TopUp</title><link rel="stylesheet" href="style.css">
+<meta name="description" content="Vizuka TopUp — Free Fire top-up store in Nepal."><meta name="theme-color" content="#7c3aed">
+<title>Vizuka TopUp</title><link rel="stylesheet" href="style.css">
 </head><body>
-<header><a class="brand" href="#"><b>V</b> VIZUKA <span>TOPUP</span></a>
-<nav><a href="#products">Products</a><a href="#how">How it works</a><a href="#contact">Contact</a></nav>
-<a class="admin" href="admin.html">Admin</a></header>
-<section class="hero"><div><small>⚡ FAST • SIMPLE • SECURE</small><h1>Free Fire <span>Top Up</span><br>made simple.</h1>
-<p>Choose a package, enter your Player ID and continue to checkout.</p><a class="btn" href="#products">Browse Packages</a></div>
-<div class="hero-card">💎<strong>Vizuka TopUp</strong><small>Diamonds • Passes • Memberships</small></div></section>
-<main id="products"><div class="head"><div><small>STORE</small><h2>Choose your package</h2></div><div id="filters"></div></div><div id="grid" class="grid"></div></main>
-<section id="how" class="section"><small>HOW IT WORKS</small><h2>Top up in a few steps</h2><div class="steps">
-<div><b>01</b><h3>Select</h3><p>Choose your package.</p></div><div><b>02</b><h3>Enter UID</h3><p>Provide your Free Fire Player ID.</p></div>
-<div><b>03</b><h3>Pay</h3><p>Use eSewa, Khalti or bank payment.</p></div><div><b>04</b><h3>Confirm</h3><p>Submit your reference and receive an order ID.</p></div></div></section>
-<section id="contact" class="contact"><div><small>NEED HELP?</small><h2>Contact Vizuka TopUp</h2><p>WhatsApp: <b>9807088460</b></p></div>
-<a class="btn" href="https://wa.me/9779807088460" target="_blank">💬 WhatsApp</a></section>
+<header><a class="brand" href="#"><b>V</b> VIZUKA <span>TOPUP</span></a><nav><a href="#products">Products</a><a href="#how">How it works</a><a href="#contact">Contact</a></nav><a class="admin" href="admin.html">Admin</a></header>
+<section class="hero"><div><small>⚡ FAST • SIMPLE • SECURE</small><h1>Free Fire <span>Top Up</span><br>made simple.</h1><p>Choose a package, enter your Player ID and place your order.</p><a class="btn" href="#products">Browse Packages</a></div><div class="hero-card">💎<strong>Vizuka TopUp</strong><small>Diamonds • Passes • Memberships</small></div></section>
+<main id="products"><div class="head"><div><small>STORE</small><h2>Choose your package</h2></div><div id="filters"></div></div><div id="notice" class="notice hidden"></div><div id="grid" class="grid"></div></main>
+<section id="how" class="section"><small>HOW IT WORKS</small><h2>Top up in a few steps</h2><div class="steps"><div><b>01</b><h3>Select</h3><p>Choose your package.</p></div><div><b>02</b><h3>Enter UID</h3><p>Provide your Free Fire Player ID.</p></div><div><b>03</b><h3>Choose payment</h3><p>Select your payment method.</p></div><div><b>04</b><h3>Get order ID</h3><p>Save your order ID for support.</p></div></div></section>
+<section id="contact" class="contact"><div><small>NEED HELP?</small><h2>Contact Vizuka TopUp</h2><p>WhatsApp: <b>9807088460</b></p></div><a class="btn" href="https://wa.me/9779807088460" target="_blank" rel="noopener">💬 WhatsApp</a></section>
 <footer>© 2026 Vizuka TopUp • Not affiliated with Garena or Free Fire.</footer>
-<div id="modal" class="modal hidden"><div class="box"><button id="close">×</button><small>ORDER</small><h2 id="pname"></h2><h3 id="pprice"></h3>
-<form id="form"><label>Free Fire Player ID<input id="uid" required inputmode="numeric" placeholder="Enter your UID"></label>
-<label>Your name (optional)<input id="name" placeholder="Your name"></label><label>Payment method<select id="method" required>
-<option value="">Select payment method</option><option>eSewa</option><option>Khalti</option><option>Bank Transfer</option><option>Bank QR</option></select></label>
-<button class="btn full">Continue to Payment</button></form></div></div>
-<script src="app.js"></script></body></html>
+<div id="modal" class="modal hidden"><div class="box"><button id="close" class="x">×</button><small>ORDER</small><h2 id="pname"></h2><h3 id="pprice"></h3><form id="form"><label>Free Fire Player ID<input id="uid" required inputmode="numeric" maxlength="20" placeholder="Enter your UID"></label><label>Your name (optional)<input id="name" maxlength="80" placeholder="Your name"></label><label>Payment method<select id="method" required><option value="">Select payment method</option><option>eSewa</option><option>Khalti</option><option>Bank Transfer</option><option>Bank QR</option></select></label><button class="btn full">Place Order</button></form><div id="result" class="result hidden"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="app.js"></script></body></html>
