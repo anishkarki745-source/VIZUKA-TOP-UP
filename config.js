@@ -1,5 +1,4 @@
 /* PUBLIC CONFIG ONLY. Never put a Supabase secret key here. */
 window.VIZUKA_CONFIG = {
-  SUPABASE_URL: "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE",
-  SUPABASE_PUBLISHABLE_KEY: "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE"
-};
+  SUPABASE_URL: "https://tqikvafklxcrnqcvhyoz.supabase.com",
+  SUPABASE_PUBLISHABLE_KEY: "sb_publishable_9uCJE7GZOvxi0Cp8H3-A7g_k9fCo_CF"};
