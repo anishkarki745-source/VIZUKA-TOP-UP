@@ -1,5 +1,5 @@
 const cfg=window.VIZUKA_CONFIG||{};
-const configured=cfg.SUPABASE_URL && !cfg.SUPABASE_URL.includes('PASTE_') && cfg.SUPABASE_PUBLISHABLE_KEY && !cfg.SUPABASE_PUBLISHABLE_KEY.includes('PASTE_');
+const configured=cfg.SUPABASE_URL && !cfg.SUPABASE_URL.includes('https://tqikvafklxcrnqcvhyoz.supabase.com_') && cfg.SUPABASE_PUBLISHABLE_KEY && !cfg.SUPABASE_PUBLISHABLE_KEY.includes('sb_publishable_9uCJE7GZOvxi0Cp8H3-A7g_k9fCo_CF');
 const supabaseClient=configured?window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY):null;
 const grid=document.querySelector('#grid'), filters=document.querySelector('#filters'), notice=document.querySelector('#notice'), modal=document.querySelector('#modal');
 let products=[], activeCategory='All', selected=null;
