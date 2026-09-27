@@ -1,16 +1,11 @@
 # Vizuka TopUp V4
 Static customer-only Free Fire top-up store.
 
-Flow: select package → enter UID → pay → enter transaction/reference ID → WhatsApp opens with the order details.
+Flow: select package → enter UID → pay → upload payment screenshot → WhatsApp opens with the order details. On supported phones/browsers, the screenshot can be shared directly with WhatsApp; otherwise WhatsApp opens and the customer is asked to attach it manually.
 
 No admin panel, Supabase, database, or customer login.
 
-Before publishing, replace the payment placeholders in `index.html`:
-- YOUR_ESEWA_NUMBER
-- YOUR_KHALTI_NUMBER
-- YOUR_BANK_DETAILS
-
-The supplied payment QR is included as `payment-qr.jpg` and is displayed at checkout.
+The supplied payment QR is included as `payment-qr.jpg` and is displayed at checkout. Customers pay by scanning this QR.
 
 The WhatsApp number is currently `9779807088460`.
 
