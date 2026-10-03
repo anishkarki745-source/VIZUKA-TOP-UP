@@ -1,1 +1,83 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vizuka TopUp</title><link rel="stylesheet" href="style.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head><body><header><a class="brand" href="index.html"><b>V</b> VIZUKA <span>TOPUP</span></a><a href="admin.html">Admin</a></header><main><section class="hero"><p>⚡ FAST • SIMPLE • NEPAL</p><h1>Free Fire TopUp</h1><p>Select a package, pay by QR, upload your screenshot and place your order.</p></section><section class="panel"><h2>1. Choose a package</h2><div id="products" class="products"></div></section><section class="panel"><h2>2. Payment</h2><div class="qr"><img src="payment-qr.jpg" alt="Payment QR"><p>Scan the QR and complete your payment.</p></div></section><section class="panel"><h2>3. Order</h2><form id="orderForm"><label>Player UID<input id="uid" required></label><label>Player name <small>(optional)</small><input id="name"></label><label>Payment method<select id="payment" required><option value="">Select</option><option>eSewa</option><option>Khalti</option><option>Bank</option></select></label><label>Payment screenshot<input id="screenshot" type="file" accept="image/*" required></label><label class="check"><input id="paid" type="checkbox" required> I have completed the payment.</label><button class="primary">Place Order → WhatsApp</button><p id="msg"></p></form></section></main><footer>Vizuka TopUp is not affiliated with Garena or Free Fire.</footer><script src="config.js"></script><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0b0d">
+  <title>Vizuka TopUp</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header class="topbar">
+  <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
+  <a class="logo" href="index.html"><span class="logo-mark">V</span><span>VIZUKA<span class="logo-sub">TOPUP</span></span></a>
+  <button class="icon-btn search-btn" aria-label="Search">⌕</button>
+</header>
+
+<aside class="drawer" id="drawer">
+  <div class="drawer-head"><b>VIZUKA TOPUP</b><button id="closeDrawer">×</button></div>
+  <a href="#home">Home</a>
+  <a href="#productsSection">Products</a>
+  <a href="#orderSection">Order</a>
+  <a href="admin.html">Admin</a>
+</aside>
+
+<main id="home">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">FREE FIRE TOP UP</div>
+      <h1>GET MORE<br><span>DIAMONDS</span></h1>
+      <p>Fast • Safe • Reliable</p>
+      <a href="#productsSection" class="hero-btn">SHOP NOW <span>›</span></a>
+    </div>
+    <div class="hero-art"><div class="crate">◆ ◆ ◆</div></div>
+  </section>
+
+  <section class="section" id="productsSection">
+    <div class="section-title"><span class="flame">♨</span><h2>Popular Products</h2></div>
+    <div id="products" class="products"></div>
+  </section>
+
+  <section class="checkout section" id="orderSection">
+    <div class="section-title"><span class="flame">✦</span><h2>Complete Your Order</h2></div>
+
+    <div class="selected-pill" id="selectedPill">Select a package above</div>
+
+    <div class="pay-box">
+      <div class="pay-title">Payment</div>
+      <div class="qr-wrap">
+        <img src="payment-qr.jpg" alt="Payment QR">
+        <div>
+          <strong>Scan & Pay</strong>
+          <p>Complete payment first, then upload the payment screenshot below.</p>
+        </div>
+      </div>
+    </div>
+
+    <form id="orderForm">
+      <div class="form-grid">
+        <label>Player UID<input id="uid" required inputmode="numeric" placeholder="Enter your Player UID"></label>
+        <label>Player Name <small>(optional)</small><input id="name" placeholder="Enter player name"></label>
+        <label>Payment Method<select id="payment" required><option value="">Select method</option><option>eSewa</option><option>Khalti</option><option>Bank</option></select></label>
+        <label>Payment Screenshot<input id="screenshot" type="file" accept="image/*" required></label>
+      </div>
+      <label class="check"><input id="paid" type="checkbox" required> I have completed the payment.</label>
+      <button class="primary" type="submit">Place Order <span>→</span> WhatsApp</button>
+      <p id="msg"></p>
+    </form>
+  </section>
+</main>
+
+<nav class="bottom-nav">
+  <a class="active" href="#home"><span>⌂</span><b>Home</b></a>
+  <a href="#productsSection"><span>▣</span><b>Orders</b></a>
+  <a href="#orderSection"><span>◌</span><b>Support</b></a>
+  <a href="admin.html"><span>♙</span><b>Account</b></a>
+</nav>
+
+<footer>Vizuka TopUp is not affiliated with Garena or Free Fire.</footer>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

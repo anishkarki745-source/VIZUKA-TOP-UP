@@ -1,10 +1,20 @@
-VIZUKA TOPUP V5 FINAL
+VIZUKA TOPUP - REFERENCE UI
 
-1. Run schema.sql in Supabase SQL Editor.
-2. Create your admin user in Supabase Authentication > Users.
-3. Upload all files to GitHub Pages root: index.html, admin.html, app.js, admin.js, config.js, style.css, schema.sql, payment-qr.jpg.
-4. Open admin.html and log in with the Supabase Auth email/password.
-5. Customers create orders; orders are stored in Supabase.
-6. Customer attaches the payment screenshot manually in WhatsApp.
+Upload these files to your GitHub Pages root:
+index.html
+admin.html
+app.js
+admin.js
+config.js
+style.css
+payment-qr.jpg
 
-Never put a Supabase service-role/secret key in frontend code.
+This version changes the customer UI to a compact two-column mobile storefront inspired by the reference screenshot.
+
+IMPORTANT:
+- Keep your existing Supabase database.
+- Orders use product_id, not package_id/package_name/price.
+- The customer does not upload the payment screenshot to Supabase; it is attached manually in WhatsApp.
+- Never put a Supabase service-role/secret key in frontend code.
+
+After uploading, wait for GitHub Pages to deploy and hard-refresh the website.

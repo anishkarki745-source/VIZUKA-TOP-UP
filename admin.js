@@ -1,15 +1,36 @@
-const c=window.VIZUKA_CONFIG,sb=supabase.createClient(c.SUPABASE_URL,c.SUPABASE_PUBLISHABLE_KEY),lp=document.getElementById("loginPanel"),dash=document.getElementById("dashboard"),logout=document.getElementById("logout");
-const money=n=>"Rs. "+Number(n).toLocaleString("en-IN");
-async function products(){const r=await sb.from("products").select("*").order("sort_order"),b=document.getElementById("adminProducts");if(r.error){b.textContent=r.error.message;return}b.innerHTML=r.data.map(p=>`<div class="row"><b>${p.name}</b><input class="price" data-id="${p.id}" type="number" value="${p.price}"><button class="toggle" data-id="${p.id}">${p.available?"🟢 Available":"🔴 Unavailable"}</button></div>`).join("");b.querySelectorAll(".price").forEach(x=>x.onchange=()=>sb.from("products").update({price:Number(x.value)}).eq("id",x.dataset.id));b.querySelectorAll(".toggle").forEach(x=>x.onclick=async()=>{const p=r.data.find(p=>p.id===x.dataset.id);await sb.from("products").update({available:!p.available}).eq("id",p.id);products()})}
-async function orders(){
-  const [or,pr]=await Promise.all([sb.from("orders").select("*").order("created_at",{ascending:false}),sb.from("products").select("id,name,price")]);
-  const b=document.getElementById("orders");
-  if(or.error){b.textContent=or.error.message;return}
-  const map=Object.fromEntries((pr.data||[]).map(p=>[p.id,p]));
-  b.innerHTML=or.data.length?or.data.map(o=>{const p=map[o.product_id]||{};return `<article class="order"><b>${o.order_id}</b> — ${o.status}<p>${p.name||"Product"} — ${money(p.price||0)}<br>UID: ${o.player_uid}<br>Name: ${o.player_name||"Not provided"}<br>Payment: ${o.payment_method}</p><button data-id="${o.id}" data-s="approved">Approve</button> <button data-id="${o.id}" data-s="rejected">Reject</button> <button data-id="${o.id}" data-s="completed">Completed</button></article>`}).join(""):"No orders yet.";
-  b.querySelectorAll("button").forEach(x=>x.onclick=async()=>{await sb.from("orders").update({status:x.dataset.s}).eq("id",x.dataset.id);orders()});
+const c=window.VIZUKA_CONFIG;
+const sb=supabase.createClient(c.SUPABASE_URL,c.SUPABASE_PUBLISHABLE_KEY);
+const $=id=>document.getElementById(id);
+
+async function refreshProducts(){
+  const r=await sb.from("products").select("*").order("sort_order");
+  if(r.error){$("adminProducts").textContent=r.error.message;return}
+  $("adminProducts").innerHTML="";
+  (r.data||[]).forEach(p=>{
+    const row=document.createElement("div");row.className="admin-row";
+    row.innerHTML=`<div><b>${p.name}</b><div style="color:#888b99;font-size:12px">${p.available?"Available":"Unavailable"} · Rs. ${Number(p.price).toLocaleString("en-IN")}</div></div><div style="display:flex;gap:6px"><button class="buy" data-toggle="${p.id}">${p.available?"ON":"OFF"}</button></div>`;
+    row.querySelector("[data-toggle]").onclick=async()=>{
+      const u=await sb.from("products").update({available:!p.available}).eq("id",p.id);
+      if(u.error) alert(u.error.message); else refreshProducts();
+    };
+    $("adminProducts").appendChild(row);
+  });
 }
-function show(){lp.hidden=true;dash.hidden=false;logout.hidden=false;products();orders()}
-document.getElementById("loginForm").onsubmit=async e=>{e.preventDefault();const r=await sb.auth.signInWithPassword({email:email.value,password:password.value});document.getElementById("loginMsg").textContent=r.error?r.error.message:"";if(!r.error)show()};
-logout.onclick=async()=>{await sb.auth.signOut();location.reload()};
-sb.auth.getSession().then(r=>r.data.session?show():null);
+async function refreshOrders(){
+  const pr=await sb.from("products").select("id,name,price");
+  const map=Object.fromEntries((pr.data||[]).map(p=>[p.id,p]));
+  const r=await sb.from("orders").select("*").order("created_at",{ascending:false});
+  if(r.error){$("orders").innerHTML=`<tr><td colspan="5">${r.error.message}</td></tr>`;return}
+  $("orders").innerHTML=(r.data||[]).map(o=>{
+    const p=map[o.product_id]||{};
+    return `<tr><td>${o.order_id||o.id}</td><td>${p.name||"Unknown"}<br><small>Rs. ${p.price??""}</small></td><td>${o.player_uid||""}</td><td>${o.payment_method||""}</td><td><select data-status="${o.id}"><option ${o.status==="pending"?"selected":""}>pending</option><option ${o.status==="completed"?"selected":""}>completed</option><option ${o.status==="cancelled"?"selected":""}>cancelled</option></select></td></tr>`;
+  }).join("");
+  document.querySelectorAll("[data-status]").forEach(x=>x.onchange=async()=>{const u=await sb.from("orders").update({status:x.value}).eq("id",x.dataset.status);if(u.error)alert(u.error.message)});
+}
+async function showDashboard(){
+  $("loginPanel").hidden=true;$("dashboard").hidden=false;$("logout").hidden=false;
+  await refreshProducts();await refreshOrders();
+}
+$("loginForm").onsubmit=async e=>{e.preventDefault();const r=await sb.auth.signInWithPassword({email:$("email").value,password:$("password").value});if(r.error)$("loginMsg").textContent=r.error.message;else showDashboard()};
+$("logout").onclick=async()=>{await sb.auth.signOut();location.reload()};
+sb.auth.getSession().then(({data})=>{if(data.session)showDashboard()});
