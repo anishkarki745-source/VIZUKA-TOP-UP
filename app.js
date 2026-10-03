@@ -115,9 +115,7 @@ document.getElementById("orderForm").onsubmit = async e => {
 
   const r = await sb.from("orders").insert({
     order_id: id,
-    product_id: selected.id,
-    package_name: selected.name,
-    price: selected.price,
+    product_id: selected.id
     player_uid: uid,
     player_name: name || null,
     payment_method: payment,
