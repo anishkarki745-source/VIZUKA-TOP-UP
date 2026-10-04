@@ -1,4 +1,4 @@
-Could not find the 'player_name' column of 'orders' in the schema cacheconst c=window.VIZUKA_CONFIG;
+const c=window.VIZUKA_CONFIG;
 const sb=supabase.createClient(c.SUPABASE_URL,c.SUPABASE_PUBLISHABLE_KEY);
 let products=[],selected=null;
 
