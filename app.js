@@ -59,7 +59,7 @@ document.getElementById("orderForm").onsubmit=async e=>{
   const uid=document.getElementById("uid").value.trim();
   const name=document.getElementById("name").value.trim();
   const payment=document.getElementById("payment").value;
-  const r=await sb.from("orders").insert({order_id:id,product_id:selected.id,player_uid:uid,payment_method:payment,status:"pending"});
+  const r=await sb.from("orders").insert({order_id:id,product_id:selected.id,product_name:selected.name,player_uid:uid,payment_method:payment,status:"pending"});
   if(r.error){m.textContent=r.error.message;console.error(r.error);return}
   const text=`*VIZUKA TOPUP ORDER*\n\nOrder ID: ${id}\nProduct: ${selected.name}\nPrice: ${money(selected.price)}\nPlayer UID: ${uid}\nName: ${name||"Not provided"}\nPayment: ${payment}\n\nPayment screenshot is ready. Please attach it to this WhatsApp chat.`;
   window.open(`https://wa.me/${c.WHATSAPP}?text=${encodeURIComponent(text)}`,"_blank");
